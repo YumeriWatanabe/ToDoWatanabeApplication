@@ -8,4 +8,6 @@
 
     <string name="detail_button_label">詳細</string>
 
+    <string name="create">新規タスク作成</string>
+
 </resources>

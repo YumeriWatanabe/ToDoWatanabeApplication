@@ -2,15 +2,16 @@ package com.example.todowatanabeapplication.dto;
 
 import java.time.LocalDate;
 
-public class todo {
+public class todoItem {
     private boolean status;
-    private LocalDate dueDate;
+    private String deadLine;
     private String taskTitle;
     private int priority;
 
-    public todo(boolean status, LocalDate dueDate, String taskTitle, int priority){
+
+    public todoItem(boolean status, String deadLine , String taskTitle, int priority){
         this.status = status;
-        this.dueDate = dueDate;
+        this.deadLine = deadLine;
         this.taskTitle = taskTitle;
         this.priority = priority;
     }
@@ -19,8 +20,8 @@ public class todo {
         return status;
     }
 
-    public LocalDate getdueDate(){
-        return dueDate;
+    public String getDeadLine(){
+        return deadLine;
     }
 
     public String getTaskTitle(){
@@ -30,6 +31,7 @@ public class todo {
     public int getPriority(){
         return priority;
     }
+
 
 }
 
