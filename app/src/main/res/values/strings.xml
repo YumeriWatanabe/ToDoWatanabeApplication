@@ -8,6 +8,20 @@
 
     <string name="detail_button_label">詳細</string>
 
-    <string name="create">新規タスク作成</string>
+<!--新規登録画面-->
+    <string name="createTitle">新規タスク作成</string>
+    <string name="cmp_status">完了状態</string>
+    <string name="save_button_label">保存</string>
+    <string name="priority">重要度:</string>
+    <string name="select_date">日付選択</string>
+    <string name="deadline_date">期限:</string>
+
+
+    <!--重要度スピナー選択肢-->
+    <string-array name="priority_array">
+        <item>高</item>
+        <item>中</item>
+        <item>低</item>
+    </string-array>
 
 </resources>

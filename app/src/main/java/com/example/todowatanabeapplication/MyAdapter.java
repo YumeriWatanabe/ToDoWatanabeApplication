@@ -2,6 +2,7 @@ package com.example.todowatanabeapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +14,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.todowatanabeapplication.dto.todoItem;
+import com.example.todowatanabeapplication.dto.ToDoItem;
 
-import java.util.Date;
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
-    private List<todoItem> todoItems;
+    private List<ToDoItem> todoItems;
     private Context context;
 
     // コンストラクタでデータリストを受け取る
-    public MyAdapter(List<todoItem> todoItems) {
+    public MyAdapter(List<ToDoItem> todoItems) {
         this.todoItems = todoItems;
     }
 
@@ -63,11 +63,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     // データをバインド
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        todoItem todoItem = todoItems.get(position);
+        ToDoItem todoItem = todoItems.get(position);
         holder.checkBox.setChecked(todoItem.getStatus());
         holder.dueDate.setText(String.valueOf(todoItem.getDeadLine()));
-        holder.taskTitle.setText(todoItem.getTaskTitle());
-        holder.priority.setText(String.valueOf(todoItem.getPriority()));
+        holder.taskTitle.setText(todoItem.getToDoTitle());
+        //holder.priority.setText(String.valueOf(todoItem.getPriority()));
+
+        String priority = todoItem.getPriority();
+        if (priority.equals("高")) {
+            holder.priority.setText("重要度: 高");
+            holder.priority.setTextColor(Color.RED);
+        } else if (priority.equals("中")) {
+            holder.priority.setText("重要度: 中");
+            holder.priority.setTextColor(Color.BLUE);
+        } else {
+            holder.priority.setText("重要度: 低");
+            holder.priority.setTextColor(Color.GREEN);
+        }
 
         holder.detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
