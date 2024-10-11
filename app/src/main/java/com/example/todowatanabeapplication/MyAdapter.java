@@ -13,19 +13,26 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.example.todowatanabeapplication.dto.ToDoItem;
 
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+    private ToDoDatabase db;
     private List<ToDoItem> todoItems;
     private Context context;
 
     // コンストラクタでデータリストを受け取る
-    public MyAdapter(List<ToDoItem> todoItems) {
+    public MyAdapter(List<ToDoItem> todoItems, Context context) {
         this.todoItems = todoItems;
+        this.context = context;
     }
+
+    //データベースの初期化
+    // データベースインスタンスを作成
+
 
     // ビューホルダーの定義
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -38,7 +45,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public ImageButton deleteButton;
 
 
-        public TextView textView;
+        //public TextView textView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -63,6 +70,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     // データをバインド
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        db = Room.databaseBuilder(context, ToDoDatabase.class, "todo_database").build();
+
         ToDoItem todoItem = todoItems.get(position);
         holder.checkBox.setChecked(todoItem.getStatus());
         holder.dueDate.setText(todoItem.getDeadLine());
@@ -97,10 +106,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         });
 
         holder.deleteButton.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View view){
-                Intent intent = new Intent();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        db.toDoDao().delete(todoItem);
+                    }
+                }).start();
             }
         });
     }

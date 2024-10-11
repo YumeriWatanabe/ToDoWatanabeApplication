@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("aaa","bbb");
         setContentView(R.layout.activity_main);
 
-
         // データベースインスタンスを作成
         db = Room.databaseBuilder(getApplicationContext(),
                 ToDoDatabase.class, "todo_database").build();
@@ -53,13 +52,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         // アダプタをRecyclerViewにセット
-                        myAdapter = new MyAdapter(todoList);
+                        myAdapter = new MyAdapter(todoList, getApplicationContext());
                         recyclerView.setAdapter(myAdapter);
                     }
                 });
             }
         }).start();
-
 
 //        todoList = new ArrayList<>();
 //        todoList.add(new ToDoItem(false, "10/10","買い物", "たまご買う", "低"));
@@ -68,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //        myAdapter = new MyAdapter(todoList);
 //        recyclerView.setAdapter(myAdapter);
-
 
         // 新規タスク登録ボタンの設定
         createToDoButton = findViewById(R.id.createToDoButton);
@@ -82,4 +79,25 @@ public class MainActivity extends AppCompatActivity {
 
         })
     ;}
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //final List<ToDoItem>
+                todoList = db.toDoDao().getAllToDoItems(); // タスク一覧を取得
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // RecyclerViewにデータを反映
+                        myAdapter = new MyAdapter(todoList, getApplicationContext());
+                        recyclerView.setAdapter(myAdapter);
+                    }
+                });
+            }
+        }).start();
+    }
+
 }
