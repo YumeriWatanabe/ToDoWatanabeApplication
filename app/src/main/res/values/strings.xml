@@ -4,7 +4,7 @@
     <string name="app_title">ToDoApp</string>
     <string name="complete_button_label">完了</string>
     <string name="switching">ビュー切替</string>
-    <string name="todolist">TODOリスト</string>
+    <string name="todolist">ToDoリスト</string>
 
     <string name="detail_button_label">詳細</string>
 

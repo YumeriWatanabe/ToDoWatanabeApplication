@@ -4,12 +4,15 @@ import androidx.annotation.OpenForTesting;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.time.LocalDate;
+
 @Entity(tableName = "todo_table")
 public class ToDoItem {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
     private boolean status;
+    //private LocalDate deadLine;
     private String deadLine;
     private String toDoTitle;
     private String toDoDetail;

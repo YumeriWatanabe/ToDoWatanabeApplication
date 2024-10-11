@@ -65,7 +65,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ToDoItem todoItem = todoItems.get(position);
         holder.checkBox.setChecked(todoItem.getStatus());
-        holder.dueDate.setText(String.valueOf(todoItem.getDeadLine()));
+        holder.dueDate.setText(todoItem.getDeadLine());
         holder.taskTitle.setText(todoItem.getToDoTitle());
         //holder.priority.setText(String.valueOf(todoItem.getPriority()));
 

@@ -1,8 +1,11 @@
 package com.example.todowatanabeapplication;
 
+
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -14,6 +17,7 @@ import androidx.room.Room;
 import com.example.todowatanabeapplication.dto.ToDoItem;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("aaa","bbb");
         setContentView(R.layout.activity_main);
 
 

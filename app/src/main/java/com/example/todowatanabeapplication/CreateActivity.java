@@ -18,6 +18,8 @@ import androidx.room.Room;
 
 import com.example.todowatanabeapplication.dto.ToDoItem;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 public class CreateActivity extends AppCompatActivity {
@@ -96,8 +98,12 @@ public class CreateActivity extends AppCompatActivity {
             String priority = spinnerPriority.getSelectedItem().toString(); // Spinnerで選ばれた重要度
             boolean isComplete = cbCompleted.isChecked();
 
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//            LocalDate deadLine = LocalDate.parse(deadline,formatter);
+
+
             // Taskオブジェクトを作成
-            ToDoItem newToDo = new ToDoItem(isComplete, toDoTitle, toDoDetaile, deadline, priority);
+            ToDoItem newToDo = new ToDoItem(isComplete, deadline, toDoTitle, toDoDetaile, priority);
 
             db.toDoDao().insert(newToDo);
 
