@@ -14,35 +14,33 @@
     <!-- 期限選択 -->
 
     <EditText
-        android:id="@+id/etToDoTitle"
+        android:id="@+id/editToDoTitle"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="56dp"
-        android:hint="タスクを入力してください"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etDetailToDo"
+        android:id="@+id/editDetailToDo"
         android:layout_width="0dp"
         android:layout_height="137dp"
         android:layout_marginTop="30dp"
-        android:hint="タスクの詳細を入力してください"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etToDoTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/editToDoTitle" />
 
     <CheckBox
-        android:id="@+id/cbCompleted"
+        android:id="@+id/editCompleted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/cmp_status"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDetailToDo" />
+        app:layout_constraintTop_toBottomOf="@+id/editDetailToDo" />
 
     <TextView
         android:id="@+id/tvDeadline"
@@ -52,7 +50,7 @@
         android:text="@string/deadline_date"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbCompleted" />
+        app:layout_constraintTop_toBottomOf="@+id/editCompleted" />
 
     <!-- 重要度選択 -->
 
@@ -65,12 +63,12 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="115dp"
         android:text="@string/select_date"
-        app:layout_constraintStart_toEndOf="@+id/tvSelectedDate"
-        app:layout_constraintTop_toBottomOf="@+id/etDetailToDo"
+        app:layout_constraintStart_toEndOf="@+id/editSelectedDate"
+        app:layout_constraintTop_toBottomOf="@+id/editDetailToDo"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/tvSelectedDate"
+        android:id="@+id/editSelectedDate"
         android:layout_width="157dp"
         android:layout_height="32dp"
         android:layout_marginStart="20dp"
@@ -78,7 +76,7 @@
         android:text=""
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/tvDeadline"
-        app:layout_constraintTop_toBottomOf="@+id/cbCompleted" />
+        app:layout_constraintTop_toBottomOf="@+id/editCompleted" />
 
     <TextView
         android:id="@+id/tvPriority"
@@ -97,16 +95,16 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toEndOf="@+id/tvPriority"
-        app:layout_constraintTop_toBottomOf="@+id/tvSelectedDate"
+        app:layout_constraintTop_toBottomOf="@+id/editSelectedDate"
         tools:ignore="MissingConstraints" />
 
-    <!-- 保存ボタン -->
+    <!-- 編集ボタン -->
     <Button
-        android:id="@+id/btnSave"
+        android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/save_button_label"
+        android:text="@string/edit_button_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerPriority" />
 

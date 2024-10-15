@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import com.example.todowatanabeapplication.dto.ToDoItem;
+import com.example.todowatanabeapplication.database.dao.dto.ToDoItem;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private MyAdapter myAdapter;
     private List<ToDoItem> todoList;  // ToDoデータリスト
     private ImageButton createToDoButton;
+
+    public static final int REQUEST_CODE_EDIT_TODO = 1;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
@@ -52,20 +52,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         // アダプタをRecyclerViewにセット
-                        myAdapter = new MyAdapter(todoList, getApplicationContext());
+                        myAdapter = new MyAdapter(todoList, getApplicationContext() ,MainActivity.this);//MainActivity.this
                         recyclerView.setAdapter(myAdapter);
                     }
                 });
             }
         }).start();
 
-//        todoList = new ArrayList<>();
-//        todoList.add(new ToDoItem(false, "10/10","買い物", "たまご買う", "低"));
-//        todoList.add(new ToDoItem(true,"10/17","会議", "デイリー","高"));
-//        todoList.add(new ToDoItem(false, "10/9","運動","1時間のランニング","中"));
-//
-//        myAdapter = new MyAdapter(todoList);
-//        recyclerView.setAdapter(myAdapter);
 
         // 新規タスク登録ボタンの設定
         createToDoButton = findViewById(R.id.createToDoButton);
@@ -78,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         })
+
+
     ;}
 
     @Override
@@ -92,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         // RecyclerViewにデータを反映
-                        myAdapter = new MyAdapter(todoList, getApplicationContext());
+                        myAdapter = new MyAdapter(todoList, getApplicationContext(), MainActivity.this);
                         recyclerView.setAdapter(myAdapter);
                     }
                 });

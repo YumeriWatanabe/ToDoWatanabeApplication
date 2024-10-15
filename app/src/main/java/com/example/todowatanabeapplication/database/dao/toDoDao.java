@@ -1,11 +1,12 @@
-package com.example.todowatanabeapplication.dao;
+package com.example.todowatanabeapplication.database.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
-import com.example.todowatanabeapplication.dto.ToDoItem;
+import com.example.todowatanabeapplication.database.dao.dto.ToDoItem;
 
 import java.util.List;
 
@@ -15,8 +16,14 @@ public interface toDoDao{
         @Insert
         void insert(ToDoItem toDoItem);
 
+        @Update
+        void update(ToDoItem toDoItem);
+
         @Delete
         void delete(ToDoItem toDoItem);
+
+        @Query("Select * From todo_table where id = :toDoId")
+        ToDoItem getToDoItemById (int toDoId);
 
         @Query("Select * From todo_table")
         List<ToDoItem> getAllToDoItems();

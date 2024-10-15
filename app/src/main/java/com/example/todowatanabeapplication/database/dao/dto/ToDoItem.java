@@ -1,4 +1,4 @@
-package com.example.todowatanabeapplication.dto;
+package com.example.todowatanabeapplication.database.dao.dto;
 
 import androidx.annotation.OpenForTesting;
 import androidx.room.Entity;
@@ -38,18 +38,37 @@ public class ToDoItem {
         return status;
     }
 
+    public void setStatus(boolean status){
+        this.status = status;
+    }
+
     public String getDeadLine(){
         return deadLine;
+    }
+
+    public void setDeadLine(String deadLine){
+        this.deadLine = deadLine;
     }
 
     public String getToDoTitle(){
         return toDoTitle;
     }
 
+    public void setToDoTitle(String toDoTitle){
+        this.toDoTitle = toDoTitle;
+    }
+
     public String getToDoDetail(){ return toDoDetail;}
+
+    public void setToDoDetail(String toDoDetail){
+        this.toDoDetail = toDoDetail;
+    }
 
     public String getPriority(){ return priority;}
 
+    public void setPriority(String priority){
+        this.priority = priority;
+    }
 
 }
 

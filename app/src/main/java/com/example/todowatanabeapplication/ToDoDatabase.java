@@ -2,10 +2,9 @@ package com.example.todowatanabeapplication;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
 
-import com.example.todowatanabeapplication.dao.toDoDao;
-import com.example.todowatanabeapplication.dto.ToDoItem;
+import com.example.todowatanabeapplication.database.dao.toDoDao;
+import com.example.todowatanabeapplication.database.dao.dto.ToDoItem;
 
 @Database(entities = {ToDoItem.class}, version = 1, exportSchema = false)
 //@TypeConverters(converter.class)  // Convertersクラスを登録

@@ -1,5 +1,6 @@
 package com.example.todowatanabeapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,19 +16,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
-import com.example.todowatanabeapplication.dto.ToDoItem;
+import com.example.todowatanabeapplication.database.dao.dto.ToDoItem;
 
 import java.util.List;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private ToDoDatabase db;
-    private List<ToDoItem> todoItems;
+    private static List<ToDoItem> todoItems;
     private Context context;
+    private Activity activity;
 
     // コンストラクタでデータリストを受け取る
-    public MyAdapter(List<ToDoItem> todoItems, Context context) {
+    public MyAdapter(List<ToDoItem> todoItems, Context context, Activity activity) {
         this.todoItems = todoItems;
         this.context = context;
+        this.activity = activity;
     }
 
     //データベースの初期化
@@ -43,9 +46,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public Button detailButton;
         public ImageButton editButton;
         public ImageButton deleteButton;
-
-
-        //public TextView textView;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -101,7 +101,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
             @Override
             public void onClick(View view){
-                Intent intent = new Intent();
+                Intent intent = new Intent(context,EditActivity.class);
+                intent.putExtra("TODO_ID", todoItem.getId());
+                activity.startActivity(intent);
+                //activity.startActivityForResult(intent, MainActivity.REQUEST_CODE_EDIT_TODO);
+
             }
         });
 

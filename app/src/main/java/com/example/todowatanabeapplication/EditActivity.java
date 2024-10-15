@@ -18,38 +18,38 @@ import com.example.todowatanabeapplication.database.dao.dto.ToDoItem;
 
 import java.util.Calendar;
 
-public class CreateActivity extends AppCompatActivity {
+public class EditActivity extends AppCompatActivity {
     private ToDoDatabase db;
+    private ToDoItem toDoItem;
 
-    private EditText etToDoTitle;
-    private EditText etDetailToDo;
-    private CheckBox cbCompleted;
+    private EditText editToDoTitle;
+    private EditText editDetailToDo;
+    private CheckBox editCompleted;
     private Button btnSelectDate;
-    private TextView tvSelectedDate;
+    private TextView editSelectedDate;
     private Spinner spinnerPriority;
-    private Button btnSave;
+    private Button btnEdit;
     private String selectedDate = ""; //選択された日付を格納する変数
 
-    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.create);
+        setContentView(R.layout.edit);
 
-        // フィールドの関連付け
-        etToDoTitle = findViewById(R.id.etToDoTitle);
-        etDetailToDo = findViewById(R.id.etDetailToDo);
-        cbCompleted = findViewById(R.id.cbCompleted);
+        //フィールドとの関連付け
+        editToDoTitle = findViewById(R.id.editToDoTitle);
+        editDetailToDo = findViewById(R.id.editDetailToDo);
+        editCompleted = findViewById(R.id.editCompleted);
         btnSelectDate = findViewById(R.id.btnSelectDate);
-        tvSelectedDate = findViewById(R.id.tvSelectedDate);
+        editSelectedDate = findViewById(R.id.editSelectedDate);
         spinnerPriority = findViewById(R.id.spinnerPriority);
-        btnSave = findViewById(R.id.btnSave);
+        btnEdit = findViewById(R.id.btnEdit);
 
         //データベースの初期化
         db = Room.databaseBuilder(getApplicationContext(),
                 ToDoDatabase.class, "todo_database").allowMainThreadQueries().build();
-
 
         // Spinnerの設定（重要度の選択肢をセット）
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -69,7 +69,7 @@ public class CreateActivity extends AppCompatActivity {
             int day = calendar.get(Calendar.DAY_OF_MONTH);
 
             // DatePickerDialogを表示
-            DatePickerDialog datePickerDialog = new DatePickerDialog(CreateActivity.this,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(EditActivity.this,
                     (view, year1, monthOfYear, dayOfMonth) -> {
                         // 月は0から始まるので+1する
                         monthOfYear = monthOfYear + 1;
@@ -78,33 +78,65 @@ public class CreateActivity extends AppCompatActivity {
                         selectedDate = year1 + "-" + String.format("%02d", monthOfYear) + "-" + String.format("%02d", dayOfMonth);
 
                         // TextViewに選択された日付を表示
-                        tvSelectedDate.setText(selectedDate);
+                        editSelectedDate.setText(selectedDate);
                     }, year, month, day);
             datePickerDialog.show();
 
         });
 
+        // タスクIDを取得
+        int toDoId = getIntent().getIntExtra("TODO_ID", -1);
 
-        // タスクを保存するボタンの処理
-        btnSave.setOnClickListener(v -> {
+        if (toDoId != -1) {
+            toDoItem = db.toDoDao().getToDoItemById(toDoId);
+            if (toDoItem != null) {
+                editToDoTitle.setText(toDoItem.getToDoTitle());
+                editDetailToDo.setText(toDoItem.getToDoDetail());
+                editCompleted.setChecked(toDoItem.getStatus());
+                editSelectedDate.setText(toDoItem.getDeadLine());
+                // 取得した重要度に応じてSpinnerの選択位置を設定
+                if (toDoItem.getPriority() != null) {
+                    int spinnerPosition = adapter.getPosition(toDoItem.getPriority());
+                    spinnerPriority.setSelection(spinnerPosition);
+                }
+            }
+        }
+
+
+        //編集ボタンをクリックしたときの処理
+        btnEdit.setOnClickListener(v -> {
             // 入力された情報を取得
-            String toDoTitle = etToDoTitle.getText().toString();
-            String toDoDetaile = etDetailToDo.getText().toString();
+            String toDoTitle = editToDoTitle.getText().toString();
+            String toDoDetaile = editDetailToDo.getText().toString();
             String deadline = selectedDate;
             String priority = spinnerPriority.getSelectedItem().toString(); // Spinnerで選ばれた重要度
-            boolean isComplete = cbCompleted.isChecked();
+            boolean isComplete = editCompleted.isChecked();
 
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//            LocalDate deadLine = LocalDate.parse(deadline,formatter);
+            //変更を加えた項目のみ更新する
+            if (!toDoTitle.isEmpty() && !toDoTitle.equals(toDoItem.getToDoTitle())) {
+                toDoItem.setToDoTitle(toDoTitle);
+            }
 
+            if (!toDoDetaile.isEmpty() && !toDoDetaile.equals(toDoItem.getToDoDetail())) {
+                toDoItem.setToDoDetail(toDoDetaile);
+            }
 
-            // ToDoItemオブジェクトを作成
-            ToDoItem newToDo = new ToDoItem(isComplete, deadline, toDoTitle, toDoDetaile, priority);
-            //insert
-            db.toDoDao().insert(newToDo);
+            if (!deadline.isEmpty() && !deadline.equals(toDoItem.getDeadLine())) {
+                toDoItem.setDeadLine(deadline);
+            }
 
+            if (!priority.isEmpty() && !priority.equals(toDoItem.getPriority())) {
+                toDoItem.setPriority(priority);
+            }
+
+            if (isComplete != toDoItem.getStatus()) {
+                toDoItem.setStatus(isComplete);
+            }
+
+            //更新
+            db.toDoDao().update(toDoItem);
             finish();
-        })
-    ;}
-}
+        });
 
+    }
+}

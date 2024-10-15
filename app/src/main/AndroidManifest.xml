@@ -24,6 +24,7 @@
         </activity>
 
         <activity android:name=".CreateActivity"></activity>
+        <activity android:name=".EditActivity"></activity>
 
     </application>
 
