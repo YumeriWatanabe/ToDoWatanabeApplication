@@ -94,6 +94,7 @@ public class EditActivity extends AppCompatActivity {
                 editDetailToDo.setText(toDoItem.getToDoDetail());
                 editCompleted.setChecked(toDoItem.getStatus());
                 editSelectedDate.setText(toDoItem.getDeadLine());
+                selectedDate = toDoItem.getDeadLine();
                 // 取得した重要度に応じてSpinnerの選択位置を設定
                 if (toDoItem.getPriority() != null) {
                     int spinnerPosition = adapter.getPosition(toDoItem.getPriority());
@@ -113,25 +114,25 @@ public class EditActivity extends AppCompatActivity {
             boolean isComplete = editCompleted.isChecked();
 
             //変更を加えた項目のみ更新する
-            if (!toDoTitle.isEmpty() && !toDoTitle.equals(toDoItem.getToDoTitle())) {
+           // if (!toDoTitle.isEmpty() && !toDoTitle.equals(toDoItem.getToDoTitle())) {
                 toDoItem.setToDoTitle(toDoTitle);
-            }
+            //}
 
-            if (!toDoDetaile.isEmpty() && !toDoDetaile.equals(toDoItem.getToDoDetail())) {
+            //if (!toDoDetaile.isEmpty() && !toDoDetaile.equals(toDoItem.getToDoDetail())) {
                 toDoItem.setToDoDetail(toDoDetaile);
-            }
+            //}
 
-            if (!deadline.isEmpty() && !deadline.equals(toDoItem.getDeadLine())) {
+            //if (!deadline.isEmpty() && !deadline.equals(toDoItem.getDeadLine())) {
                 toDoItem.setDeadLine(deadline);
-            }
+            //}
 
-            if (!priority.isEmpty() && !priority.equals(toDoItem.getPriority())) {
+            //if (!priority.isEmpty() && !priority.equals(toDoItem.getPriority())) {
                 toDoItem.setPriority(priority);
-            }
+            //}
 
-            if (isComplete != toDoItem.getStatus()) {
+            //if (isComplete != toDoItem.getStatus()) {
                 toDoItem.setStatus(isComplete);
-            }
+            //}
 
             //更新
             db.toDoDao().update(toDoItem);

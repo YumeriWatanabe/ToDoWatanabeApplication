@@ -25,6 +25,12 @@ public interface toDoDao{
         @Query("Select * From todo_table where id = :toDoId")
         ToDoItem getToDoItemById (int toDoId);
 
+        @Query("Select * From todo_table where status = 1")
+        List <ToDoItem> getCompletedToDoItems();
+
+        @Query("Select * From todo_table where status = 0")
+        List <ToDoItem> getInCompletedToDoItems();
+
         @Query("Select * From todo_table")
         List<ToDoItem> getAllToDoItems();
     }
