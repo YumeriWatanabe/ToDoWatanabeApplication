@@ -33,10 +33,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         this.activity = activity;
     }
 
-    //データベースの初期化
-    // データベースインスタンスを作成
-
-
     // ビューホルダーの定義
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public CheckBox checkBox;
@@ -44,7 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public TextView taskTitle;
         public TextView priority;
         public Button detailButton;
-        public ImageButton editButton;
+        //public ImageButton editButton;
         public ImageButton deleteButton;
 
         public MyViewHolder(View itemView) {
@@ -54,7 +50,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             taskTitle = itemView.findViewById(R.id.taskTitle);
             priority = itemView.findViewById(R.id.priority);
             detailButton = itemView.findViewById(R.id.detailButton);
-            editButton = itemView.findViewById(R.id.editImageButton);
+            //editButton = itemView.findViewById(R.id.editImageButton);
             deleteButton = itemView.findViewById(R.id.deleteImageButton);
         }
     }
@@ -92,22 +88,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         holder.detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent ();
-            }
-        });
-
-        holder.editButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
             public void onClick(View view){
                 Intent intent = new Intent(context,EditActivity.class);
                 intent.putExtra("TODO_ID", todoItem.getId());
                 activity.startActivity(intent);
                 //activity.startActivityForResult(intent, MainActivity.REQUEST_CODE_EDIT_TODO);
-
             }
         });
+
+//        holder.editButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
+//                Intent intent = new Intent(context,EditActivity.class);
+//                intent.putExtra("TODO_ID", todoItem.getId());
+//                activity.startActivity(intent);
+//                //activity.startActivityForResult(intent, MainActivity.REQUEST_CODE_EDIT_TODO);
+//            }
+//        });
 
         holder.deleteButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -121,7 +118,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             }
         });
     }
-
     // リストのサイズを返す
     @Override
     public int getItemCount() {

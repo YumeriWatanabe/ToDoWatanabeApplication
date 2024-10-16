@@ -5,8 +5,10 @@
     <string name="app_title">ToDoApp</string>
     <string name="complete_button_label">完了</string>
     <string name="switching">ビュー切替</string>
-    <string name="todolist">ToDoリスト</string>
-    <string name="detail_button_label">詳細</string>
+    <string name="todolist">すべてのToDoリスト</string>
+    <string name="completed_todolist">完了済みTODOリスト</string>
+    <string name="inCompleted_todolist">未完了TODOリスト</string>
+    <string name="detail_button_label">詳細・編集</string>
 
 <!--新規登録画面-->
     <string name="createTitle">新規タスク作成</string>
@@ -17,7 +19,7 @@
     <string name="deadline_date">期限:</string>
 
 <!--編集画面-->
-    <string name="editTitle">編集画面</string>
+    <string name="detailEditTitle">詳細・編集画面</string>
     <string name="edit_button_label">編集</string>
 
     <!--重要度スピナー選択肢-->

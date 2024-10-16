@@ -81,7 +81,6 @@ public class EditActivity extends AppCompatActivity {
                         editSelectedDate.setText(selectedDate);
                     }, year, month, day);
             datePickerDialog.show();
-
         });
 
         // タスクIDを取得
@@ -113,26 +112,11 @@ public class EditActivity extends AppCompatActivity {
             String priority = spinnerPriority.getSelectedItem().toString(); // Spinnerで選ばれた重要度
             boolean isComplete = editCompleted.isChecked();
 
-            //変更を加えた項目のみ更新する
-           // if (!toDoTitle.isEmpty() && !toDoTitle.equals(toDoItem.getToDoTitle())) {
                 toDoItem.setToDoTitle(toDoTitle);
-            //}
-
-            //if (!toDoDetaile.isEmpty() && !toDoDetaile.equals(toDoItem.getToDoDetail())) {
                 toDoItem.setToDoDetail(toDoDetaile);
-            //}
-
-            //if (!deadline.isEmpty() && !deadline.equals(toDoItem.getDeadLine())) {
                 toDoItem.setDeadLine(deadline);
-            //}
-
-            //if (!priority.isEmpty() && !priority.equals(toDoItem.getPriority())) {
                 toDoItem.setPriority(priority);
-            //}
-
-            //if (isComplete != toDoItem.getStatus()) {
                 toDoItem.setStatus(isComplete);
-            //}
 
             //更新
             db.toDoDao().update(toDoItem);

@@ -93,9 +93,9 @@
     <Spinner
         android:id="@+id/spinnerPriority"
         android:layout_width="130dp"
-        android:layout_height="27dp"
+        android:layout_height="30dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="39dp"
         app:layout_constraintStart_toEndOf="@+id/tvPriority"
         app:layout_constraintTop_toBottomOf="@+id/tvSelectedDate"
         tools:ignore="MissingConstraints" />
@@ -109,5 +109,15 @@
         android:text="@string/save_button_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerPriority" />
+
+    <TextView
+        android:id="@+id/createTitle"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/createTitle"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/etToDoTitle"
+        tools:layout_editor_absoluteX="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +24,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ToDoDatabase db;
-    //private toDoDao toDoDao;
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
     private List<ToDoItem> todoList;  // すべてのToDoデータリスト
@@ -31,15 +31,16 @@ public class MainActivity extends AppCompatActivity {
     private List<ToDoItem> inCompletedToDoList;
     private ImageButton createToDoButton;
     private Switch viewSwitch;
-
-    public static final int REQUEST_CODE_EDIT_TODO = 1;
+    private TextView listTitle;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("aaa","bbb");
+        //Log.d("aaa","bbb");
         setContentView(R.layout.activity_main);
+
+        listTitle = findViewById(R.id.todolist);
 
         // データベースインスタンスを作成
         db = Room.databaseBuilder(getApplicationContext(),
@@ -57,13 +58,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         // アダプタをRecyclerViewにセット
-                        //MainActivity.this
+                        myAdapter = new MyAdapter(completedToDoList, getApplicationContext(), MainActivity.this);//MainActivity.this
                         recyclerView.setAdapter(myAdapter);
                     }
                 });
             }
         }).start();
-
 
         //ビュー切り替え
         viewSwitch = findViewById(R.id.switching_View);
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                                                           new Thread(new Runnable() {
                                                               @Override
                                                               public void run() {
+                                                                  listTitle.setText(R.string.completed_todolist);
                                                                   completedToDoList = db.toDoDao().getCompletedToDoItems();  // DAO経由で完了タスク一覧を取得
                                                                   runOnUiThread(new Runnable() {
                                                                       @Override
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                                                           new Thread(new Runnable() {
                                                               @Override
                                                               public void run() {
+                                                                  listTitle.setText(R.string.inCompleted_todolist);
                                                                   inCompletedToDoList = db.toDoDao().getInCompletedToDoItems();  // DAO経由で未完了タスク一覧を取得
                                                                   runOnUiThread(new Runnable() {
                                                                       @Override
@@ -115,11 +117,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, CreateActivity.class);
                 startActivity(intent);
             }
-
-        })
-
-
-    ;}
+        });
+    }
 
     @Override
     protected void onResume() {
@@ -127,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //final List<ToDoItem>
+                listTitle.setText(R.string.todolist);
                 todoList = db.toDoDao().getAllToDoItems(); // タスク一覧を取得
                 runOnUiThread(new Runnable() {
                     @Override
