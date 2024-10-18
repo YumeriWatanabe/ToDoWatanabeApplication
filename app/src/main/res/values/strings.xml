@@ -11,7 +11,8 @@
     <string name="detail_button_label">詳細・編集</string>
 
 <!--新規登録画面-->
-    <string name="createTitle">新規タスク作成</string>
+    <string name="return_button_label">戻る</string>
+    <string name="createTitle">新規ToDo作成</string>
     <string name="cmp_status">完了状態</string>
     <string name="save_button_label">保存</string>
     <string name="priority">重要度:</string>
@@ -19,8 +20,9 @@
     <string name="deadline_date">期限:</string>
 
 <!--編集画面-->
-    <string name="detailEditTitle">詳細・編集画面</string>
+    <string name="detailEditTitle">ToDo詳細・編集</string>
     <string name="edit_button_label">編集</string>
+    <string name="delete_button_label">削除</string>
 
     <!--重要度スピナー選択肢-->
     <string-array name="priority_array">

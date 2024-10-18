@@ -3,6 +3,7 @@ package com.example.todowatanabeapplication;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,6 +22,7 @@ import java.util.Calendar;
 public class EditActivity extends AppCompatActivity {
     private ToDoDatabase db;
     private ToDoItem toDoItem;
+    private Button returnButton;
 
     private EditText editToDoTitle;
     private EditText editDetailToDo;
@@ -29,6 +31,7 @@ public class EditActivity extends AppCompatActivity {
     private TextView editSelectedDate;
     private Spinner spinnerPriority;
     private Button btnEdit;
+    private Button btnDelete;
     private String selectedDate = ""; //選択された日付を格納する変数
 
     @SuppressLint("MissingInflatedId")
@@ -39,6 +42,8 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.edit);
 
         //フィールドとの関連付け
+        returnButton = findViewById(R.id.e_returnButton);
+
         editToDoTitle = findViewById(R.id.editToDoTitle);
         editDetailToDo = findViewById(R.id.editDetailToDo);
         editCompleted = findViewById(R.id.editCompleted);
@@ -46,10 +51,20 @@ public class EditActivity extends AppCompatActivity {
         editSelectedDate = findViewById(R.id.editSelectedDate);
         spinnerPriority = findViewById(R.id.spinnerPriority);
         btnEdit = findViewById(R.id.btnEdit);
+        btnDelete = findViewById(R.id.btnDelete);
 
         //データベースの初期化
         db = Room.databaseBuilder(getApplicationContext(),
                 ToDoDatabase.class, "todo_database").allowMainThreadQueries().build();
+
+        //戻るボタン
+        returnButton.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                finish();
+                                            }
+                                        }
+        );
 
         // Spinnerの設定（重要度の選択肢をセット）
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -123,5 +138,9 @@ public class EditActivity extends AppCompatActivity {
             finish();
         });
 
+        btnDelete.setOnClickListener(v ->  {
+                        db.toDoDao().delete(toDoItem);
+                        finish();
+                    });
     }
 }

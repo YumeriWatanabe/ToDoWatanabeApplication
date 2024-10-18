@@ -3,6 +3,7 @@ package com.example.todowatanabeapplication;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,6 +22,8 @@ import java.util.Calendar;
 public class CreateActivity extends AppCompatActivity {
     private ToDoDatabase db;
 
+    private Button returnButton;
+
     private EditText etToDoTitle;
     private EditText etDetailToDo;
     private CheckBox cbCompleted;
@@ -38,6 +41,8 @@ public class CreateActivity extends AppCompatActivity {
         setContentView(R.layout.create);
 
         // フィールドの関連付け
+        returnButton = findViewById(R.id.c_returnButton);
+
         etToDoTitle = findViewById(R.id.etToDoTitle);
         etDetailToDo = findViewById(R.id.etDetailToDo);
         cbCompleted = findViewById(R.id.cbCompleted);
@@ -49,6 +54,15 @@ public class CreateActivity extends AppCompatActivity {
         //データベースの初期化
         db = Room.databaseBuilder(getApplicationContext(),
                 ToDoDatabase.class, "todo_database").allowMainThreadQueries().build();
+
+        //戻るボタン
+        returnButton.setOnClickListener(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                finish();
+                                            }
+                                        }
+        );
 
 
         // Spinnerの設定（重要度の選択肢をセット）

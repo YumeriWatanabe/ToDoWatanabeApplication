@@ -1,5 +1,6 @@
 package com.example.todowatanabeapplication;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -41,7 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public TextView priority;
         public Button detailButton;
         //public ImageButton editButton;
-        public ImageButton deleteButton;
+        //public ImageButton deleteButton;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -51,7 +52,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             priority = itemView.findViewById(R.id.priority);
             detailButton = itemView.findViewById(R.id.detailButton);
             //editButton = itemView.findViewById(R.id.editImageButton);
-            deleteButton = itemView.findViewById(R.id.deleteImageButton);
+            //deleteButton = itemView.findViewById(R.id.deleteImageButton);
         }
     }
 
@@ -106,17 +107,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 //            }
 //        });
 
-        holder.deleteButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        db.toDoDao().delete(todoItem);
-                    }
-                }).start();
-            }
-        });
+//        holder.deleteButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
+//                new Thread(new Runnable() {
+//                    @SuppressLint("NotifyDataSetChanged")
+//                    @Override
+//                    public void run() {
+//                        db.toDoDao().delete(todoItem);
+//                        //notifyItemRemoved(position);
+//                        //notifyDataSetChanged();
+//                        //activity.();
+//                    }
+//                }).start();
+//            }
+//        });
     }
     // リストのサイズを返す
     @Override

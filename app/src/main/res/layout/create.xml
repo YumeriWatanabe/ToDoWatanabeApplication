@@ -6,6 +6,36 @@
     android:padding="16dp"
     tools:context=".CreateActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-15dp"
+        tools:layout_editor_absoluteY="16dp">
+
+        <Button
+            android:id="@+id/c_returnButton"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:text="@string/return_button_label" />
+
+        <TextView
+            android:id="@+id/createTitle"
+            android:layout_width="200dp"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/createTitle"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/etToDoTitle"
+            tools:layout_editor_absoluteX="16dp" />
+
+
+    </LinearLayout>
+
+
     <!-- タスク名 -->
 
 
@@ -17,12 +47,12 @@
         android:id="@+id/etToDoTitle"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="30dp"
         android:hint="タスクを入力してください"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <EditText
         android:id="@+id/etDetailToDo"
@@ -44,47 +74,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDetailToDo" />
 
-    <TextView
-        android:id="@+id/tvDeadline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/deadline_date"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cbCompleted" />
+    <LinearLayout
+        android:id="@+id/dateLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/cbCompleted"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-20dp">
 
-    <!-- 重要度選択 -->
+        <!-- 重要度選択 -->
 
 
     <!-- 選択された日付を表示するTextView -->
-    <Button
-        android:id="@+id/btnSelectDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="115dp"
-        android:text="@string/select_date"
-        app:layout_constraintStart_toEndOf="@+id/tvSelectedDate"
-        app:layout_constraintTop_toBottomOf="@+id/etDetailToDo"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/tvDeadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/deadline_date"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cbCompleted" />
 
-    <TextView
-        android:id="@+id/tvSelectedDate"
-        android:layout_width="157dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:text=""
-        android:textSize="20sp"
-        app:layout_constraintStart_toEndOf="@+id/tvDeadline"
-        app:layout_constraintTop_toBottomOf="@+id/cbCompleted" />
+        <TextView
+            android:id="@+id/tvSelectedDate"
+            android:layout_width="157dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="3dp"
+            android:text=""
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/tvDeadline"
+            app:layout_constraintTop_toBottomOf="@+id/cbCompleted" />
 
+        <Button
+            android:id="@+id/btnSelectDate"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/select_date"
+            app:layout_constraintStart_toEndOf="@+id/tvSelectedDate"
+            app:layout_constraintTop_toBottomOf="@+id/etDetailToDo"
+            tools:ignore="MissingConstraints" />
+
+     </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/dateLinearLayout"
+        tools:layout_editor_absoluteX="-18dp">
     <TextView
         android:id="@+id/tvPriority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="5dp"
         android:text="@string/priority"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,31 +144,26 @@
     <Spinner
         android:id="@+id/spinnerPriority"
         android:layout_width="130dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="39dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
         app:layout_constraintStart_toEndOf="@+id/tvPriority"
         app:layout_constraintTop_toBottomOf="@+id/tvSelectedDate"
         tools:ignore="MissingConstraints" />
 
-    <!-- 保存ボタン -->
+    </LinearLayout>
+
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="20dp"
         android:text="@string/save_button_label"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerPriority" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-    <TextView
-        android:id="@+id/createTitle"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/createTitle"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/etToDoTitle"
-        tools:layout_editor_absoluteX="16dp" />
+    <!-- 保存ボタン -->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
